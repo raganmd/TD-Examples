@@ -2,8 +2,8 @@
 
 ## Contributing Programers / Artists ##
 
-**Matthew Ragan** | raganmd@gmail.com |[ matthewragan.com](http://matthewragan.com)  
-**Ian Shelanskey** | | [design.ianshelanskey.com](http://design.ianshelanskey.com)
+**Matthew Ragan** | [ matthewragan.com](http://matthewragan.com)  
+**Ian Shelanskey** | [design.ianshelanskey.com](http://design.ianshelanskey.com)
 
 ## Overview ##
 

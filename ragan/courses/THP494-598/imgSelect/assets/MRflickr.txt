@@ -1,0 +1,10 @@
+name	link
+Bubbles	https://farm8.staticflickr.com/7522/16318894252_63b995c2d7_o.jpg
+Tea	https://farm8.staticflickr.com/7488/16131711318_ddcf1821cb_o.jpg
+Crazy Eyes	https://farm9.staticflickr.com/8672/16013008140_6826cefdfb_o.jpg
+Unicorn	https://farm8.staticflickr.com/7523/15965195758_5dce6978ac_o.jpg
+Tasty	https://farm8.staticflickr.com/7503/15952040300_11793ea7ed_o.jpg
+Sassy	https://farm9.staticflickr.com/8665/16097438855_3e37ec6571_o.jpg
+Sunrise	https://farm8.staticflickr.com/7544/16053868806_e6dc381fe8_o.jpg
+Orange	https://farm9.staticflickr.com/8568/15373807543_b3d93d5637_o.jpg
+Ocean	https://farm9.staticflickr.com/8578/16082560495_8849b128d1_o.jpg

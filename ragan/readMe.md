@@ -1,12 +1,11 @@
-# TouchDesigner Examples #
+# TouchDesigner Examples #0
 
-## Contributing Programers / Artists ##
+## Programmer / Artist ##
 
 **Matthew Ragan** | [ matthewragan.com](http://matthewragan.com)  
-**Ian Shelanskey** | [design.ianshelanskey.com](http://design.ianshelanskey.com)
 
 ## Overview ##
 
-Here  you'll find an extensive library of code examples. Both full courses and discrete answers / examples are provided here. Many of these examples have corresponding videos or write-ups on the web. Please take some time to look through the contributing artist's profiles and web pages.
+Here  you'll find an extensive library of the code examples that I've put together for courses, the [TouchDesigner forum](http://derivative.ca/Forum/), and the [TouchDesigner Help Group](https://www.facebook.com/groups/touchdesignerhelp/) on Facebook. The examples here run the gamut of various applications and techniques, and as it stands this repo is a bit of a mess - in terms of organization. In the coming months I should have a better organizational structure, and better documentation. These things just take time. Meanwhile, download the code pack, and look through some examples.
 
-Happy Programming.
+Happy Programming

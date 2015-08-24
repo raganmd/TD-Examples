@@ -1,4 +1,4 @@
-# TouchDesigner Examples #0
+# TouchDesigner Examples #
 
 ## Programmer / Artist ##
 

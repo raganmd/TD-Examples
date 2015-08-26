@@ -87,7 +87,7 @@ A simple example of how to copy the contents of one table to another using Pytho
 
 ## Drop Script Example  ##
 
-### Matthew Ragan ###  
+### Matthew Ragan ###
 _8.25.15_
 
 ## Summary ##

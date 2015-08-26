@@ -26,7 +26,7 @@ This example looks at how you can use the UI Class to select a folder. This is o
 
 ## CHOP Execute ##
 
-### Matthew Ragan ###
+**Matthew Ragan**  
 _8.25.15_
 
 
@@ -61,7 +61,7 @@ None
 
 ---
 
-### Container Select ###
+## Container Select ##
 
 *Overview*
 
@@ -87,7 +87,7 @@ A simple example of how to copy the contents of one table to another using Pytho
 
 ## Drop Script Example  ##
 
-### Matthew Ragan ###
+** Mattehw Ragan **  
 _8.25.15_
 
 ## Summary ##
@@ -139,11 +139,44 @@ FIFO, short for First In First Out, is more than just a produce stocking method 
 * Python Scripting
 * CHOP Executes
 
-### Learning Extensions ###
+---
 
-*Overview*
+## Learning Extensions ##
 
-Extensions allow you to extend and modify custom components that you've created in TouchDesigner. The penultimate example of this is a custom movie player. Custom Extensions allow you to specify commands like Play(), Pause(), Stop(), Next(), and any other kind of function that you can dream up. While this may, at first, appear to have limited applications it is a tremendously powerful means of creating modular and reusable elements in TouchDesigner.
+** Mattehw Ragan **  
+_8.26.15_
+
+## Summary ##
+
+This example looks at how you to get started with Extensions in TouchDesigner. Here is a relatively simple example of how to build out a component which will respond to python commands. The typical example of this is usually a movie player module, but you can do any number of operations with this technique. In this example we can see how to drive a realtime rendering network, make changes, and reset to default values.
+
+
+## Color Key ##
+A break down of the color coding method used for 
+* **Magenta** - Read Me
+
+
+## Storage Notes ##
+
+None
+
+
+## Major Components ##
+* **gen** - This is the module  
+
+
+## Extensions or Modules on Demand ##
+* **__init__()** - the initialize command for the module
+* **SimplePrint()** - an example of extensions at work, this prints out 'Hello World'
+* **TorusPar( rows, columns )** - controls the parameters of the torus SOP
+* **Texture( filePath )** - send a path to a new movie file to change the texture used on the geometry
+* **TextureReset()** - resets the texture on the torus
+* **Rot( rx , ry , rz )** - set the rotation attributes of the geo
+* **RotReset()** - resets the rotation attributes for the get
+* **TorusNoise( noiseAmpitude )** - animate the Torus points with noise
+* **Mono( SaturationValue )** - change the saturation in the texture with a float value between 1 and 0
+* **Levels( blackLevel , brightness , opacity )** - Make post process effect changes by changing the black level, brightness, or opacity. 
+* **PostProcessReset()** - Reset the Levels and Saturation values back to their starting positions.
 
 **Core Concepts**
 * Extesnsions
@@ -151,7 +184,9 @@ Extensions allow you to extend and modify custom components that you've created 
 * Custom Functions
 * Creating reusable modules
 
-### Modules As Expressions ###
+---
+
+## Modules As Expressions ##
 
 *Overview*
 
@@ -163,7 +198,9 @@ Occasionally, you may find that you need a complex scripting function for a para
 * Parameter Expressions
 * Modules as Parameters
 
-### Op Viewer TOP and Component ###
+---
+
+## Op Viewer TOP and Component ##
 
 *Overview*
 
@@ -172,7 +209,9 @@ There are a number of ways you can see or interact with Operators in a finished 
 **Core Concepts**
 * Operator Viewing
 
-### Par Class .expr ###
+---
+
+## Par Class .expr ##
 
 *Overview*
 
@@ -183,7 +222,9 @@ While it's often useful to set parameters as static values, it can sometimes to 
 * Python Scripting
 * Setting parameters as expressions
 
-### Referencing Parameters ###
+---
+
+## Referencing Parameters ##
 
 *Overview*
 
@@ -193,7 +234,9 @@ Understanding the fundamentals of referencing is essential to working in TouchDe
 * Referencing
 * Python References
 
-### Run a DAT ###
+---
+
+## Run a DAT ##
 
 *Overview*
 
@@ -202,7 +245,9 @@ From time to time it's common to have a complex operation that requires more tha
 **Core Concepts**
 * Python Scripting
 
-### Shrink Instance Example ###
+---
+
+## Shrink Instance Example ##
 
 *Overview*
 
@@ -213,3 +258,6 @@ Complex scenes often require a programmer to think carefully about how to build 
 * Realtime Rendering
 * GPU Optimization
 * Python Scripting
+
+
+_documentation written in markdown_

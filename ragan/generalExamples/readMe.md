@@ -246,11 +246,36 @@ From time to time it's common to have a complex operation that requires more tha
 
 ---
 
-## Shrink Instance Example ##
+## Dynamic Instancing - Shrinking ##
 
-*Overview*
+**Matthew Ragan**  
+_8.26.15_
 
-Complex scenes often require a programmer to think carefully about how to build an optimized scene for live playback. Here we look at how to set up a visualization that mirrors another installation.
+
+## Summary ##
+Instancing can be a messy and complicated business when you're trying to wrap your head around a complicated idea. Here we look at how you might go about thinking through some dynamic instancing for a large number of objects. This Mimics an image sent in an email as a question about how to address a particular technique. Here there are three different examples - the original network sent via email, and two different variations made in reply.
+
+
+## Color Key ##
+* **Magenta** - Read Me Files
+* **Blue-Green** - Scripts
+* **Purple** - Textures
+
+
+## Storage Notes ##
+None
+
+
+## Major Components ##
+* **media** - a series of textures made with a replicator for instancing.
+* **media1** - a series of textures stored in a texture3D TOP for instancing
+* **Magnet** - the original example sent via email
+* **pixels** - instancing based on using a raster as the coordinate system
+* **displacement** - similar to pixels, but with the added displacement, a push of pixels upwards and outwards .
+
+
+## Extensions or Modules on Demand ##
+None
 
 **Core Concepts**
 * Instancing

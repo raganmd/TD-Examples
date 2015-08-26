@@ -22,15 +22,45 @@ This example looks at how you can use the UI Class to select a folder. This is o
 * Using the UI Class
 * Python Scripting with panel elements
 
-### CHOP Execute ###
+---
 
-*Overview*
+## CHOP Execute ##
 
-CHOP Executes are tremendously powerful method of scripting. This DAT allows you to tie the actions of CHOP Channels to scripted actions. This example looks at what information you have access to, and how to take fuller advantage of the CHOP Execute DAT.
+### Matthew Ragan ###
+_raganmd@gmail.com_  
+_8.25.15_
+
+
+## Summary ##
+
+This example looks at a number of various applications for the [CHOP Execute DAT](http://www.derivative.ca/wiki088/index.php?title=CHOP_Execute_DAT). CHOP Executes are useful for any number of different applications, but having a complete understanding of them requires looking closely at the online documentation, and learning the ins and outs of the [The Channel Class](http://www.derivative.ca/wiki088/index.php?title=Channel_Class)
+
+Here we have to LFOs that are used to append a two different Text DATs. In the first example, we have a multi channel LFO that prints out a statement which corresponds to the channel that's turning from off to on.
+
+In the second example, we can see a report of the members of the Channel Class - this gives us a better sense of understanding what kind of information we can extract from a CHOP Execute event.
+
+
+## Color Key ##
+* **Magenta** - Read Me Files
+
+
+## Storage Notes ##
+
+None
+
+
+## Major Components ##
+* None
+
+
+## Extensions or Modules on Demand ##
+None
 
 **Core Concepts**
 * CHOP Execute DATs
 * Python Scripting with channels
+
+---
 
 ### Container Select ###
 

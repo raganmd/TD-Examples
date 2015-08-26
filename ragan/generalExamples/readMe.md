@@ -87,7 +87,7 @@ A simple example of how to copy the contents of one table to another using Pytho
 
 ## Drop Script Example  ##
 
-** Mattehw Ragan **  
+**Mattehw Ragan**  
 _8.25.15_
 
 ## Summary ##
@@ -128,7 +128,7 @@ None
 
 ---
 
-### FIFO Example ###
+## FIFO Example ##
 
 *Overview*
 
@@ -143,7 +143,7 @@ FIFO, short for First In First Out, is more than just a produce stocking method 
 
 ## Learning Extensions ##
 
-** Mattehw Ragan **  
+**Mattehw Ragan**  
 _8.26.15_
 
 ## Summary ##

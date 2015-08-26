@@ -152,7 +152,6 @@ This example looks at how you to get started with Extensions in TouchDesigner. H
 
 
 ## Color Key ##
-A break down of the color coding method used for 
 * **Magenta** - Read Me
 
 

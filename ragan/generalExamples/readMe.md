@@ -27,7 +27,6 @@ This example looks at how you can use the UI Class to select a folder. This is o
 ## CHOP Execute ##
 
 ### Matthew Ragan ###
-_raganmd@gmail.com_  
 _8.25.15_
 
 
@@ -84,15 +83,50 @@ A simple example of how to copy the contents of one table to another using Pytho
 * Python and Table DATs
 * The copy command
 
-### Drop Script ###
+---
 
-*Overview*
+## Drop Script Example  ##
 
-Drop scripts allow you to dynamically set a number of different elements based on drag and drop actions in you user interface. Understanding how this works can be a little mysterious at first. Here we look at the various args that are available when an item is dropped on a container, and how you might use that information. This might be used to set a file path for a whole folder, or a single image. 
+### Matthew Ragan ###  
+_8.25.15_
+
+## Summary ##
+
+This example looks at a variety of Drag and Drop examples. Here you'll see the various methods for using drop scripts and the args returned when using them. Take a close look at the text DAT inside of each container called "dropScript" - this DAT is responsible for holding the script(s) run when any object is drag / dropped onto a container.
+
+
+## Color Key ##
+* **Magenta** - Read Me Files
+* **White** - Examine DAT to see what is in storage
+* **Black** - Template structure for setting the storage keys for this TOX
+
+
+## Storage Notes ##
+
+**uiColor** - A dictionary for UI color elements, each item is a list comprised of rgba, structured as [ r , g , b , a ]
+* **BG** - Background
+* **borderA** - border A
+* **borderB** - border B
+* **headerBG** - Header Background
+* **headerBorderA** - Header Border A
+* **headerBorderB** - Header Border B
+
+
+## Major Components ##
+1. **container1** - drag a file onto this component to see the path to the dropped file
+2. **container2** - drag an image or movie file onto this component to see that file displayed as the image for this container.
+3. **container3** - drag a folder from any directory on your computer onto this container to see the path to the folder. Inside you'll find a folder DAT which retrieves the contents of the folder.
+4. **container4** - drag any file or folder onto this container to see all of the args returned by the drop action.
+
+
+## Extensions or Modules on Demand ##
+None
 
 **Core Concepts**
 * Drop Script args
 * Python Scripting with drop scripts
+
+---
 
 ### FIFO Example ###
 

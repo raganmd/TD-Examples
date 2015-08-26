@@ -4,6 +4,7 @@
 
 **Matthew Ragan** | [ matthewragan.com](http://matthewragan.com)  
 **Ian Shelanskey** | [design.ianshelanskey.com](http://design.ianshelanskey.com)
+**Barak Koren** | [Barakooda](https://barakooda3d.wordpress.com/2015/04/01/touchdesigner-barakooda-examples-i/)
 
 ## Overview ##
 

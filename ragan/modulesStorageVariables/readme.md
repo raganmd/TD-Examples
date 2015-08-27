@@ -1,33 +1,38 @@
-# Name of Project #
+# Modules Storage and Variables #
 ---
-## Name of TOX ##
 
-### Name of Developer ###
-_contact email for developer_
+### Matthew Ragna ###
+_[matthewragan.com](http://matthewragan.com)_
+_8.27.15_
 
 ---
 ## Summary ##
 
-A summary of the form and fucntion of the TOX - broad strokes about how / wy it works the way it does.
+This network is an examination of Modules, Storage, and Variables. These data structures can be used for any number of operations, and here we take a closer look at what that means, and how we might take advantage of these concepts. I've tried to find practical examples, but in some cases the real world application of an idea is too complex to express in a simple example. That is to say that you'll need to use some of your own imagination about how far you might push some of these ideas for a real world system or installation. When possible Base COMPS should have read me files. This example is also structured as modularly as possible - meaning that most major components saved as external TOX files, and then loaded on start-up. This has the benefit for providing for examples that stand alone without the main file, and also ensuring that examples can be changed and modified without needing to change the entire parent network. 
 
 
 ## Color Key ##
-A break down of the color coding method used for 
+* **Magenta** - Read Me files, Local Base COMPs
+* **Yellow** - Modules
 
 
 ## Storage Notes ##
-
-Notes here as appropriate about key value pairs placed in or available from storage
+None
 
 
 ## Major Components ##
-* **Instances** - descriptions 
-* **Textures** - descriptions 
-* **Logic Structures** - descriptions 
-* **Renering Strucutres** - descriptions 
+* **live** - A live rendered network in the root of the project. This is used for examples, and for referencing in examples
+* **com** - A simple network of operators available for reference in other examples
+* **localVariables** - Examples of the structure for using Variables
+* **moduleReferences** - Examples of Referencing Modules
+* **modulesForUI** - An example of using modules for UI Color References
+* **modulesDictionaryForUI** - An example of using a dictionary in a module for UI color references
+* **storage** - Examples of storage
+* **storagePointersForUI** - Examples of using pointers in storage for UI colors
+* **storageDictionaryForUI** - Examples of using a dictionary in storage for UI Colors
 
 
 ## Extenstions or Modules on Demand ##
-A list of methods / functions available from the TOX
+None
 
 _documentation written in markdown_

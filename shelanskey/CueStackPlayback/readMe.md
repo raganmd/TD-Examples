@@ -1,5 +1,5 @@
-Questions about this material can be sent to ishelanskey@gmail.com.
-More info on my website (http://design.ianshelanskey.com)
+Questions about this material can be sent to ishelanskey@gmail.com.  
+[More info on my website](http://design.ianshelanskey.com)
 
 #Cue Stack Playback Example
 Here is an example of a cue based playback system. Inside the network you will find a small GUI to control the active cue as well as some useful system info like current FPS, cooktime, and which AB deck is currently displayed. All of the content is kept in the component labeled 'content'.   

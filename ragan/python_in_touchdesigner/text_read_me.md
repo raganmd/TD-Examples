@@ -24,13 +24,26 @@ Printing out lines isn't especially interesting on the face of it. That being sa
 
 *Overview*
 
-Short description here
+There are lots of resources on the web that describe variables better than I might:
+* [Variable - Computer Science](https://en.wikipedia.org/wiki/Variable_(computer_science))
+* [Python Programmingg](\https://en.wikibooks.org/wiki/Python_Programming/Variables_and_Strings)
+* [Python Basics](http://www.astro.ufl.edu/~warner/prog/python.html)
 
-### example_loigic ###
+The essential idea here, however, is that you have something that you want to reference by name. That something might be a sentence, it might be a quantity, it could be anything really. Again, it's more important for us in this moment to consider that our something (whatever it is) happens to be a piece of information that we want re-use.
+
+### example_references ###
 
 *Overview*
 
-Short description here
+References are one of the engines of TouchDesgner. They're how we connect elements, and move information between operator families (and many other things as well.) I've written a good chunk already about understanding references - [check out understanding referencingg](http://matthewragan.com/2014/06/01/understanding-referencing-touchdesigner/), and [understanding referencing part 2](http://matthewragan.com/2014/06/27/understanding-referencing-part-ii-touchdesigner/) - so I'm not going to do my best not to revisit all of that same information. 
+
+I do, however, want to look at referencing from the stand point of Python. The most important thing we might do is understand the anatomy of a python expression used in as a reference to another operator.
+
+### example_logic ###
+
+*Overview*
+
+Logical statements are profoundly helpful for us when we're trying to convert an idea from what we understand, into something that a machine can interpret and act upon. Keeping that in mind, we need ways to distill ideas to their most fundamental pieces. What on earth do I mean? Well, we might think about ideas like greater than '>' , less than '<' , equal to '==' , and not equal to '!='. Further, we need to consider how we indicate when something might happen. This this set of examples we're going to focus on 'if' and 'else', as well as 'if' and 'elif' statements. What does all of that mean, well lets dig in and find out.
 
 ### example_data_structures ###
 

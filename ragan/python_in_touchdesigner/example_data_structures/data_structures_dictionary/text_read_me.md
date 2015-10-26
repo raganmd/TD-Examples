@@ -269,3 +269,5 @@ Alright. Looking closely at the above, we can see that we need only change the v
 Take some time to experiment with these ideas. As we head forward we're going to start to look at how we can use executes and for loops to see how we can really start to make headway in using Python. We've laid a lot of ground work so we can really plow ahead.
 
 [Learn more about Python Data Structures](https://docs.python.org/3.3/tutorial/datastructures.html)
+[THP 494 & 598 | Python Dictionaries](http://matthewragan.com/2015/03/31/thp-494-598-python-dictionaries-touchdesigner/)
+[TouchDesigner | FB HelpGroup | Presets](http://matthewragan.com/2015/07/29/touchdesigner-fb-helpgroup-presets/)

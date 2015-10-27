@@ -1,7 +1,7 @@
 def percent( val1  ):
 
-	percent = val1 * .01
+	calculation = val1 * .01
 
-	return percent
+	return calculation
 
 print( percent( 50 ) )

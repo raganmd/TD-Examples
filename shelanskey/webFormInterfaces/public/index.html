@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<body>
+
+<form name="myForm" id='testForm' onsubmit="return validateForm()" method="post">
+Name: <input type="text" name="fname">
+Speed:  <input type="number" name="speed" min ='1' max='20'>
+<br>
+Video: 	
+<br>
+<input type="radio" name="Video" value="0" checked> 1
+<br>
+<input type="radio" name="Video" value="1" > 2
+<br>
+<input type="radio" name="Video" value="2" > 3
+<input type="submit" value="Submit">
+</form>
+<br>
+<p>--------</p>
+<script type="text/javascript">
+function validateForm(){
+	var frm = $(document.myForm);
+	var data = JSON.stringify(frm.serializeArray());
+	$.ajax({
+		url: "action.php",
+		type: "POST",
+		data: {'json': data}
+	});
+  };
+</script>
+</body>
+</html>

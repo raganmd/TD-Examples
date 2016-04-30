@@ -1,0 +1,5 @@
+role	tox
+node	container_output/container_node/container_node.tox
+controller	container_output/container_controller/container_controller.tox
+calibrator	container_output/container_calibrator/container_calibrator.tox
+developer	container_output/container_node/container_node.tox', 'container_output/container_calibrator/container_calibrator.tox', 'container_output/container_calibrator/container_calibrator.tox'

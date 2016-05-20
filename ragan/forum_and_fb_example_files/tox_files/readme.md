@@ -184,7 +184,13 @@ If you're curious to see all of the args associated with this kind of event you 
  
 
 ### container_renderpick_drop ###
- 
+
+_**5.8.16**_
+
+**Original post / question**
+
+>Has anyone managed to make a drop script using renderpick? I'm trying to drop movie files onto rendered geometry ut renderpick stops working when you are "holding" a file from the os, even when strategy = always. I've tried using sleep() ut I can't get it.
+>
 
 ### container_selects_to_stop_cooking ###
  
@@ -211,6 +217,22 @@ If you're curious to see all of the args associated with this kind of event you 
 
 
 ### container_xml_example ###
+_**4.6.16**_
 
+My suffering is your gain...
+Here you'll find a simplified implementation of building out a multi-machine configuration file as XML or JSON. A list comp allows the user to add machines to you heart's content. Double click list comp fields to edit the machine name, edit the text fields to change attributes. Output either XML or JSON.
+Some Highlights:
+* uses extensions
+* uses new global op shortcuts
+* uses the list comp with custom parameters
+* uses storage to transport all of the relevant data
+* uses some fun dictionary loops
+* uses doc strings for self documenting methods
 
 ### slider_mike ###
+_**5.6.16**_
+
+**Original post / question**
+
+>Hi guys, I've got a chop that I want to show some number between 0 and 20. I have an increment value running to a speed chop into a null for that value. I want to have a button to stop incrementing it, (which is a multiply value in a math chop). I want a slider to continually be updated to show that chop value, but when I stop having it autoincrement, I want the slider to be able to control the chop value. Any suggestions?
+>

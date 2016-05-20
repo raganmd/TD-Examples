@@ -236,3 +236,8 @@ _**5.6.16**_
 
 >Hi guys, I've got a chop that I want to show some number between 0 and 20. I have an increment value running to a speed chop into a null for that value. I want to have a button to stop incrementing it, (which is a multiply value in a math chop). I want a slider to continually be updated to show that chop value, but when I stop having it autoincrement, I want the slider to be able to control the chop value. Any suggestions?
 >
+
+### base_simple_motion_blur ###
+_**5.20.16**_
+
+A fast look at how to set-up motion blur.

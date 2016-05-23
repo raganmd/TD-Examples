@@ -280,3 +280,36 @@ mod( 'text_copy_paste_script' ).Copy_to_target( 3, 3 )
 ```
 
 Right click and run either text_example1 or text_example2 to see it in action.
+
+### base_one_line_conditional_expressions ###
+_**5.22.16**_
+
+Conditional one line Python expressions can be used for a number of different applications.
+
+Let's imagine a circumstance where we have two different sets of animation data. Depending on another variable we want to select the appropriate set of channels. 
+
+In this example, both base comps are identical with one exception, the store key "animation_index".
+
+In base_exampel1 animation_index is set to 0, while in base_example2 animation_index is set to 1. 
+
+Let's take a closer look at our select CHOPs inside of our base components. Here we see a select with the following expression:
+
+```Python
+me.fetch( 'animation1' ) if me.fetch( 'animation_index' ) == 0 else me.fetch( 'animation2' )
+```
+
+We can pull apart the structure of this a little to better understand what's going on:
+
+[ if_value ] [ logical_test ] [ else_value ]
+
+Seen this way, we can see that the above single line expression looks something like this in plain English:
+
+select op( 'null1' ) if the animation_index value is exactly 0, otherwise select op( 'null2' )
+
+Let's look quickly at another example. In table1 we have two rows. The eval DATs below have the following expression:
+
+```Python
+op( 'table1' )[ 0, 0 ] if me.digits == 1 else op( 'table1' )[ 1, 0 ]
+```
+
+So here we can see that we select the cell in the [ 0, 0 ] position if our digits are 1, in all other cases we select the cell in the [ 1, 0 ] position.

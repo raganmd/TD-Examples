@@ -241,3 +241,42 @@ _**5.6.16**_
 _**5.20.16**_
 
 A fast look at how to set-up motion blur.
+
+### base_cell_contents ###
+_**5.22.16**_
+
+Original post / question:
+
+>Here is what i want to do and am a little lost.
+i have text in lets say the 0,0 cell in table one and a blank space in cell 0,3 in table 2
+is there a command i can write to take the text in table 1 cut it and paste it in the feild in table 2. 
+id like to do this with a interface so you select name one and it pastes in to slot 2.
+>
+
+In this example we have a table, and we want to copy the contents from one place in the table into another table.
+
+For the sake of simplicity let's start with assuming that we're always copying to the same location.
+
+Here we write a simple helper function that's an abstract form of what we're after:
+
+```Python
+target = op( 'table_target' )
+source = op( 'table_source' )
+
+def Copy_to_target( source_row, _source_col ):
+
+    target[ 0, 0 ] = source[ source_row, _source_col ]
+
+    return
+
+```
+
+Our helper fucntion takes a coordinate location in the table, and copies to the coordinate [ 0, 0] in our target table. 
+
+Rather than write this as a single sciprt, we can instead use it as a module so we can call this action from multiple locations.
+
+```Python
+mod( 'text_copy_paste_script' ).Copy_to_target( 3, 3 )
+```
+
+Right click and run either text_example1 or text_example2 to see it in action.

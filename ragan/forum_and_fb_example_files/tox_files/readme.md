@@ -313,3 +313,38 @@ op( 'table1' )[ 0, 0 ] if me.digits == 1 else op( 'table1' )[ 1, 0 ]
 ```
 
 So here we can see that we select the cell in the [ 0, 0 ] position if our digits are 1, in all other cases we select the cell in the [ 1, 0 ] position.
+
+### base_change_comp_top ###
+_**5.24.16**_
+
+**Original post / question**
+
+>Quick question... I am using a composite top and would like to be able to select the operation type in perform mode, however, how can I connect the comp operation to a list so that the names of the operations (divide, dodge, burn etc) are shown in the list. I have got as far as using a parameter chop to fetch the operator number but not the name. ideally would like to have a list of names I can select from.
+Does this make sense?
+From the looks of the example, its necessary to add in the individual operation names into table2 manually, is there not a way of capturing those names from the comp? or am I missing something.?
+>
+
+Some parameters are accessible as lists, this is often the case when thinking about the parameters that have drop down menus. Items in the drop down have a position in a list that corresponds to a value. We can do all sorts of things to change these parameters, and in the case of the composite TOP we can set the blending operation mode with something like:
+
+```Python
+op( 'comp1' ).par.operand = 0
+```
+
+That's the root of the challenge. If we want a UI element that set that parameter when we click a corresponding label we need to know the index of the label so we can create a relationship between these two.
+
+If we have a table COMP we can do something like this with a panel execute:
+
+```Python
+op( '../comp1' ).par.operand = parent().panel.celloverid
+```
+
+"But Matt!" You'll cry out.
+"I don't want to go through and make a list of all of the elements in a given parameter. Isn't there a better way?!"
+
+Sure.
+
+```Pytyhon
+op( 'comp1' ).par.operand.menuNames
+```
+
+Will produce a list of menu names, then we need to convert that into a table, then we need to transpose that into rows instead of columns, finally we can then we can feed that into the table COMP.

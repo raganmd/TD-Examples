@@ -348,3 +348,43 @@ op( 'comp1' ).par.operand.menuNames
 ```
 
 Will produce a list of menu names, then we need to convert that into a table, then we need to transpose that into rows instead of columns, finally we can then we can feed that into the table COMP.
+
+### base_resample_test ###
+_**6.2.16**_
+
+**Original post / question**
+
+>Hey guys, I wanted to ask you for a while now how are you handling this issue: in some circumstances, when converting channels to samples Shuffle Chop it looks a running timeline even though the chop is 1 sample (like LFO). The only time it's actually working for me is converting constant Chop. I tried just swapping or sequencing technique, nothing helps. The only workaroung appears to have a Stretch chop inserted somewhere to "stabilize" the output length. Any ideas? Thx
+EDIT: forgot to tell that I'm using the option "Use First Sample Only" in Shuffle. Build 60230
+>
+
+Suggestions came in to try the stretch, resample, stretch, or trim CHOPs as possible solutions to this problem. The question then is, which is the fastest?
+
+*Cook times at a Glance*
+
+| CHOP      | Cook Time in Milliseconds    |
+|-----------|------------------------------|
+| Resample  | 0.0143                       |
+| Trim      | 0.0049                       |
+| Stretch   | 0.0045                       |
+| Shift     | 0.0041                       |
+
+*Max Cook times over 10 Seconds*
+
+| CHOP      | Cook Time in Milliseconds    |
+|-----------|------------------------------|
+| Resample  | 0.0616                       |
+| Trim      | 0.1191                       |
+| Stretch   | 0.0374                       |
+| Shift     | 0.0246                       |
+
+*Average Cook times over 10 Seconds*
+
+| CHOP      | Cook Time in Milliseconds    |
+|-----------|------------------------------|
+| Resample  | 0.0179                       |
+| Trim      | 0.0062                       |
+| Stretch   | 0.0081                       |
+| Shift     | 0.0059                       |
+
+I think I'd go with averge cook time as a benchmark, given that this is probably used over time. With that in mind, it looks like it's a tie between trim and shift.

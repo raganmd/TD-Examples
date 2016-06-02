@@ -395,9 +395,7 @@ _**6.2.16**_
 **Original post / question**
 
 >Hello group! Is it possible to instance a geo containing an instanced geo? Maybe I'm doing something wrong here but it doesn't seem to be! Is there one of those ''obvious once you know it'' answers to why this is?
-
 Pretty sure instancing is limited to one layer. (I'd love to be proven wrong). You can do this behaviour in Houdini with packed primitives.
-
 From what I see it doesn't seem to be possible. I can get to the same result by making a more complex network feeding the first set of instances but it's not as tidy as it would be otherwise know what I mean?
 >
 

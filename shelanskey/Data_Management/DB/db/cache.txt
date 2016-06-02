@@ -1,0 +1,49 @@
+{
+    "meta": "DB Record Cache",
+    "records": [
+        {
+            "Age": 25,
+            "Coffee": "Black",
+            "First": "Ian",
+            "IDM": true,
+            "Key": "H1B3HY",
+            "Last": "Shelanskey",
+            "Location": "Phoenix"
+        },
+        {
+            "Age": 30,
+            "Coffee": "Americano",
+            "First": "Matthew",
+            "IDM": true,
+            "Key": "AIERVE",
+            "Last": "Ragan",
+            "Location": "San Francisco"
+        },
+        {
+            "Age": 35,
+            "Coffee": "Americano",
+            "First": "Boyd",
+            "IDM": true,
+            "Key": "EK3MFD",
+            "Last": "Branch",
+            "Location": "Phoenix"
+        },
+        {
+            "Age": 40,
+            "Coffee": "Black",
+            "First": "Dan",
+            "IDM": true,
+            "Key": "EEY16M",
+            "Last": "Fine",
+            "Location": "Iowa"
+        },
+        {
+            "Coffee": "Black",
+            "First": "Dan",
+            "IDM": true,
+            "Key": "APSWMK",
+            "Last": "Fine",
+            "Location": "Iowa"
+        }
+    ]
+}

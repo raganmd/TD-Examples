@@ -388,3 +388,29 @@ Suggestions came in to try the stretch, resample, stretch, or trim CHOPs as poss
 | Shift     | 0.0059                       |
 
 I think I'd go with averge cook time as a benchmark, given that this is probably used over time. With that in mind, it looks like it's a tie between trim and shift.
+
+### base_instancing_instances ###
+_**6.2.16**_
+
+**Original post / question**
+
+>Hello group! Is it possible to instance a geo containing an instanced geo? Maybe I'm doing something wrong here but it doesn't seem to be! Is there one of those ''obvious once you know it'' answers to why this is?
+
+Pretty sure instancing is limited to one layer. (I'd love to be proven wrong). You can do this behaviour in Houdini with packed primitives.
+
+From what I see it doesn't seem to be possible. I can get to the same result by making a more complex network feeding the first set of instances but it's not as tidy as it would be otherwise know what I mean?
+>
+
+instancing instances is just about doing the math in CHOPs to determine the location of the instances.
+
+Two Examples
+
+* instance a copy sop - this is the effect we want
+* chop math for the same effect - this is how to get there with just instances and CHOP math
+
+All that CHOP data is just the location for copies to be drawn by the GPU. 
+
+In the second example: 
+* I use the box to find the coordinates for our corners
+* shuffle that to expose all of the coordinates. * Next add the second set of locations
+* then shuffle again to end up with a single set of xyz coordinates for the instances.

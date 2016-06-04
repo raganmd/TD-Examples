@@ -280,3 +280,135 @@ mod( 'text_copy_paste_script' ).Copy_to_target( 3, 3 )
 ```
 
 Right click and run either text_example1 or text_example2 to see it in action.
+
+### base_one_line_conditional_expressions ###
+_**5.22.16**_
+
+Conditional one line Python expressions can be used for a number of different applications.
+
+Let's imagine a circumstance where we have two different sets of animation data. Depending on another variable we want to select the appropriate set of channels. 
+
+In this example, both base comps are identical with one exception, the store key "animation_index".
+
+In base_exampel1 animation_index is set to 0, while in base_example2 animation_index is set to 1. 
+
+Let's take a closer look at our select CHOPs inside of our base components. Here we see a select with the following expression:
+
+```Python
+me.fetch( 'animation1' ) if me.fetch( 'animation_index' ) == 0 else me.fetch( 'animation2' )
+```
+
+We can pull apart the structure of this a little to better understand what's going on:
+
+[ if_value ] [ logical_test ] [ else_value ]
+
+Seen this way, we can see that the above single line expression looks something like this in plain English:
+
+select op( 'null1' ) if the animation_index value is exactly 0, otherwise select op( 'null2' )
+
+Let's look quickly at another example. In table1 we have two rows. The eval DATs below have the following expression:
+
+```Python
+op( 'table1' )[ 0, 0 ] if me.digits == 1 else op( 'table1' )[ 1, 0 ]
+```
+
+So here we can see that we select the cell in the [ 0, 0 ] position if our digits are 1, in all other cases we select the cell in the [ 1, 0 ] position.
+
+### base_change_comp_top ###
+_**5.24.16**_
+
+**Original post / question**
+
+>Quick question... I am using a composite top and would like to be able to select the operation type in perform mode, however, how can I connect the comp operation to a list so that the names of the operations (divide, dodge, burn etc) are shown in the list. I have got as far as using a parameter chop to fetch the operator number but not the name. ideally would like to have a list of names I can select from.
+Does this make sense?
+From the looks of the example, its necessary to add in the individual operation names into table2 manually, is there not a way of capturing those names from the comp? or am I missing something.?
+>
+
+Some parameters are accessible as lists, this is often the case when thinking about the parameters that have drop down menus. Items in the drop down have a position in a list that corresponds to a value. We can do all sorts of things to change these parameters, and in the case of the composite TOP we can set the blending operation mode with something like:
+
+```Python
+op( 'comp1' ).par.operand = 0
+```
+
+That's the root of the challenge. If we want a UI element that set that parameter when we click a corresponding label we need to know the index of the label so we can create a relationship between these two.
+
+If we have a table COMP we can do something like this with a panel execute:
+
+```Python
+op( '../comp1' ).par.operand = parent().panel.celloverid
+```
+
+"But Matt!" You'll cry out.
+"I don't want to go through and make a list of all of the elements in a given parameter. Isn't there a better way?!"
+
+Sure.
+
+```Pytyhon
+op( 'comp1' ).par.operand.menuNames
+```
+
+Will produce a list of menu names, then we need to convert that into a table, then we need to transpose that into rows instead of columns, finally we can then we can feed that into the table COMP.
+
+### base_resample_test ###
+_**6.2.16**_
+
+**Original post / question**
+
+>Hey guys, I wanted to ask you for a while now how are you handling this issue: in some circumstances, when converting channels to samples Shuffle Chop it looks a running timeline even though the chop is 1 sample (like LFO). The only time it's actually working for me is converting constant Chop. I tried just swapping or sequencing technique, nothing helps. The only workaroung appears to have a Stretch chop inserted somewhere to "stabilize" the output length. Any ideas? Thx
+EDIT: forgot to tell that I'm using the option "Use First Sample Only" in Shuffle. Build 60230
+>
+
+Suggestions came in to try the stretch, resample, stretch, or trim CHOPs as possible solutions to this problem. The question then is, which is the fastest?
+
+*Cook times at a Glance*
+
+| CHOP      | Cook Time in Milliseconds    |
+|-----------|------------------------------|
+| Resample  | 0.0143                       |
+| Trim      | 0.0049                       |
+| Stretch   | 0.0045                       |
+| Shift     | 0.0041                       |
+
+*Max Cook times over 10 Seconds*
+
+| CHOP      | Cook Time in Milliseconds    |
+|-----------|------------------------------|
+| Resample  | 0.0616                       |
+| Trim      | 0.1191                       |
+| Stretch   | 0.0374                       |
+| Shift     | 0.0246                       |
+
+*Average Cook times over 10 Seconds*
+
+| CHOP      | Cook Time in Milliseconds    |
+|-----------|------------------------------|
+| Resample  | 0.0179                       |
+| Trim      | 0.0062                       |
+| Stretch   | 0.0081                       |
+| Shift     | 0.0059                       |
+
+I think I'd go with averge cook time as a benchmark, given that this is probably used over time. With that in mind, it looks like it's a tie between trim and shift.
+
+### base_instancing_instances ###
+_**6.2.16**_
+
+**Original post / question**
+
+>Hello group! Is it possible to instance a geo containing an instanced geo? Maybe I'm doing something wrong here but it doesn't seem to be! Is there one of those ''obvious once you know it'' answers to why this is?
+Pretty sure instancing is limited to one layer. (I'd love to be proven wrong). You can do this behaviour in Houdini with packed primitives.
+From what I see it doesn't seem to be possible. I can get to the same result by making a more complex network feeding the first set of instances but it's not as tidy as it would be otherwise know what I mean?
+>
+
+instancing instances is just about doing the math in CHOPs to determine the location of the instances.
+
+Two Examples
+
+* instance a copy sop - this is the effect we want
+* chop math for the same effect - this is how to get there with just instances and CHOP math
+
+All that CHOP data is just the location for copies to be drawn by the GPU. 
+
+In the second example: 
+* I use the box to find the coordinates for our corners
+* shuffle that to expose all of the coordinates. * Next add the second set of locations
+* then shuffle again to end up with a single set of xyz coordinates for the instances.

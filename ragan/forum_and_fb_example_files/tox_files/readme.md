@@ -412,3 +412,23 @@ In the second example:
 * I use the box to find the coordinates for our corners
 * shuffle that to expose all of the coordinates. * Next add the second set of locations
 * then shuffle again to end up with a single set of xyz coordinates for the instances.
+
+### base_input_replication ###
+_**6.8.16**_
+
+**Original post / question**
+
+>Any way to create in multi-in for an container like, for example, in the composite top?
+there isn't a multi in the same way you see in the multi in TOPs. You can, however, use a Composite TOP, which now has a selection field where you can add any number of operators
+Good to know, but sadly this is not what i am looking in to. The idear is to create an video-mixer wich automatcly creates ne sliders for every new input. I tried to monitor the number of inputs and at a change create a new in-top. The value changes inside the value0-param but it does not seem to update the channel itself wich i need to fire my script.
+>
+
+Actually we can generate a list of inputs with just a little bit of clever Python.
+
+First we need to grab the string that's in the top parameter field in our composite TOP. We can do this with the following expression:
+
+```Python
+op( 'comp1' ).par.top.val
+```
+
+Next we'll convert this into a set of rows, transpose this so we have columns, and then we have something we can use to drive a replicator in order to create sliders on the fly.

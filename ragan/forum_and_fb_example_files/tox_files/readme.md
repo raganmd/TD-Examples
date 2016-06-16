@@ -433,7 +433,7 @@ op( 'comp1' ).par.top.val
 
 Next we'll convert this into a set of rows, transpose this so we have columns, and then we have something we can use to drive a replicator in order to create sliders on the fly.
 
-### base_input_replication ###
+### container_slider_jonas ###
 _**6.14.16**_
 
 **Original post / question**

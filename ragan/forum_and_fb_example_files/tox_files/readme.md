@@ -432,3 +432,17 @@ op( 'comp1' ).par.top.val
 ```
 
 Next we'll convert this into a set of rows, transpose this so we have columns, and then we have something we can use to drive a replicator in order to create sliders on the fly.
+
+### base_input_replication ###
+_**6.14.16**_
+
+**Original post / question**
+
+>Having trouble with sliders. By now i can use them pretty fine, but only when I use them alone. When i put more then one inside of an container the problems occur. I tried playing arround with different par (clicktrhough, enable, visible, layer). attached an trying tox to understand what i want to archive. Maybe someone can give me a hint.
+>
+
+Rather than using two sliders and trying to toggle their click-through on and off, we might be better off to build our own. Sliders, after all, are just containers with a knob that report out a normalized value. 
+
+Starting with this simple two knob concept we can quickly see how we might scale up to an even larger number of knobs in the future. The big idea here is to think of writing the insideu value of our parent container into a constant, which is then used to determine the x coordinate of the knob. 
+
+We also want to build this smartly so it only cooks when we're actually interacting with this element. That may seem obvious, but it can be a tricky undertaking in touch. 

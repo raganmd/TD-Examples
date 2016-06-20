@@ -34,7 +34,40 @@ imported_dict		= op( 'text_simple_json' ).text
 dict_from_json		= json.loads( imported_dict )
 
 # first let's just print the dictionary to make sure things worked out
+print( "Here is our whole json object" )
 print( imported_dict )
 
-for item in dict_from_json.items():
+print( '_ ' * 10 )
+
+# next we could print just the top tier keys
+print( "Here are our top tier keys" )
+for item in dict_from_json.keys():
 	print( item )
+
+print( '\n' )
+print( '_ ' * 10 )
+# next let's print the keys in our 'inventory' dictionary
+print( "Here are the keys in inventory" )
+for item in dict_from_json[ 'inventory' ].keys():
+	print( item )
+	
+print( '\n' )
+print( '_ ' * 10 )
+# since we're on a roll, let's first print our keys, and
+# then print their values
+print( "Here are the keys and values in inventory" )
+for key, value in dict_from_json[ 'inventory' ].items():
+	print( key, 'contains', value )
+
+print( '\n' )
+print( '_ ' * 10 )
+# That's still not very pretty, so let's see if we can make 
+# something that's a little nicer
+print( "Pretty printing our keys and values" )
+for key, value in dict_from_json[ 'inventory' ].items():
+	print( key, 'contains' )
+	
+	for item, quantity in value.items():
+		print( quantity, item )
+	
+	print( '\n' )

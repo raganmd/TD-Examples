@@ -28,6 +28,208 @@ mod( 'simple_mod_example' ).my_int
 mod( 'simple_mod_example' ).my_float
 mod( 'simple_mod_example' ).my_string
 
+A little later one we'll use some actual JSON that's not in a module on demand as well - so with any luck by the end of this we'll have a sense of how dictionaries work through and through. It's also worth pointing out that python storage can also take advantage of dictionaries for fast variable access. So, once you have a handle on how this data structure works you'll have a whole new world of options available to you.
 
-[Learn more about enumerate()](https://docs.python.org/3.4/library/functions.html#enumerate)
-[Learn more about items()](https://docs.python.org/3.4/library/stdtypes.html#dict)
+Let's first start with a a simple dictionary:
+```python
+inventory = {
+    "fruit" : {
+        "apples" : 22 ,
+        "kiwis" : 28 ,
+        "grapes" : 11 ,
+        "oranges" : 65 ,
+        "grapefruit" : 75
+    } ,
+    "vegetables" : {
+        "carrots" : 10 ,
+        "potatoes" : 8 , 
+        "onions" : 50 ,
+        "kale" : 10
+    } , 
+    "beer" : {
+        "ipa" : 32 ,
+        "stout" : 46 ,
+        "ale" : 56 ,
+    }
+}
+```
+
+Dictionaries are made of key and value pairs - the key being a string, and it's pair being any data type of your choice. You start the construction of a dictionary with curly braces. Key value pairs are separated by a colon, and new entires are separated by commas. You'll notice in the example above that we actually have a three dictionaries inside of a dictionary.
+
+Let's start by looking at just one:
+```python
+fruit = {
+    "apples" : 22 ,
+    "kiwis" : 28 ,
+    "grapes" : 11 ,
+    "oranges" : 65 ,
+    "grapefruit" : 75
+}
+```
+This would be a fine way to create a single dictionary called fruit, with five entires, each with a quantity associated with them. 
+
+If we keep this in mind, looking back at our first example we can see that we have a single dictionary called "inventory" which contains a dictionary for fruit, vegetables, and beer. This nesting of key value pairs is a part of what makes these data structure so powerful. Where lists rely on an index based system to find an entry, dictionaries rely on keys. The major difference we can think about is that lists are ordered, and dictionaries are orderless. At first glance it might seem like an orderless data structure might not be useful, but the more we use them the more we'll see how powerful they are. 
+
+Let's look at our first code example, using modules means that we can use our dot notation to access an object inside of our text DAT. 
+
+```python
+inventory = mod( 'text_test_dictionary' ).inventory
+
+# list of dictionary keys and their position
+dictionary_keys = list( enumerate( inventory ) )
+
+# let's get a feeling for how this works before we
+# write a sentence
+for item in dictionary_keys:
+    print( item[ 0 ] , item[ 1 ] )
+
+# loop through list and print the key and its
+# list position
+sentence = "The key {key} is in the {position} position of the list"
+
+for item in dictionary_keys:
+    print( sentence.format( key = item[ 1 ] , position = item[ 0 ] ) )
+```
+
+Okay, so what did we just do exactly?
+Well, we first made a list out of our dictionary keys, then we enumerated that list so we had an ordered construction with both the dictionary keys and a position, and then we printed all of that out. Why? We started by looking at how we might do this if we were working with a list. Isn't that exactly what we're trying to avoid? Yes, but since we already know how lists work this is a good place to get started so we can begin to better understand how these two things are different. 
+
+Okay, now that we've seen how this might work with an enumerated list, let's look at key value loop. We're going to use .items() to get the items out of our dictionary. We'll first just look at how to get to the keys in our dictionary.
+
+```python
+inventory = mod( 'text_test_dictionary' ).inventory
+
+for dictionary_key , dictionary_value in inventory.items():
+    print( "this dictionary key is: " , dictionary_key )
+```
+
+That's a pretty good start, and makes it easy to see how keys work. But this is a different kind of loop here, so what else can we do? Let's look at printing both our key and value this time around.
+
+```python
+# define our variables
+# using modules means that we can use our dot notation to
+# access an object inside of our text DAT
+inventory = mod( 'text_test_dictionary' ).inventory
+
+for dictionary_key , dictionary_value in inventory.items():
+    print( "this dictionary key is: " , dictionary_key )
+    print( "the dictionary value for this key is: " , dictionary_value )
+```
+
+Alright, that's pretty slick but our formatting still leaves something to be desired. Let's add a few more lines and see if we can print out something a little nicer.
+
+```python
+# define our variables
+# using modules means that we can use our dot notation to
+# access an object inside of our text DAT
+inventory = mod( 'text_test_dictionary' ).inventory
+
+# loop through the dictionary and print out contents
+for dictionary_key , dictionary_value in inventory.items():
+    # print out the first key depth in the dictionary   
+    print( "- " * 10 )
+    print( "this dictionary key is: " , dictionary_key )
+    print( "in this dictionary we have:" )
+    
+    # loop through second dictionary layer
+    for inventory_key , inventory_quantity in dictionary_value.items():
+        # print out the key and value pairs from the second level
+        print( '\t' , inventory_key , inventory_quantity )
+```
+
+Alright, not bad. Not bad at all. Here we can see that we ended up with a loop nested inside of our first loop. We started by printing out keys, then we run another loop to print out items and their quantities. 
+
+Okay, this is all well and good but what can we do with our new found tricks? Let's start by doing something seemingly simple - filling out a table with the contents of our dictionary. Why put things into a table?! At some point you'll certainly want to fill up a table with the contents of a dictionary... so we might as well look at how to do this early on.
+
+```python
+# define our variables
+# using modules means that we can use our dot notation to
+# access an object inside of our text DAT
+inventory = mod( 'text_test_dictionary' ).inventory
+table = op( 'table_inventory' )
+table_length = []
+place_holder = 1
+
+# first things first, let's clear out the contents of the table
+table.clear()
+
+# loop through the dictionary and add headers
+for dictionary_key , dictionary_value in inventory.items():
+    table.appendCol( [ dictionary_key ] )
+    # add a blank column for next set of data points
+    table.appendCol()
+
+    # add to the list so we can determine the max length of the table
+    table_length.append( len( dictionary_value ) )
+
+# set the table length based on the maximum number of dictionary entries
+table.setSize( max( table_length ) + 1 , table.numCols )
+
+# loop through dictionary again to fill in table
+for dictionary_key , dictionary_value in inventory.items():
+
+# generate an enumerated list to loop through
+    value_list = list( enumerate( dictionary_value ) )
+
+# use enumerated list to fill in table 
+    for item in value_list:
+        table[ item[ 0 ] + 1 , dictionary_key  ] = item[ 1 ]
+        table[ item[ 0 ] + 1 , place_holder ] = inventory[ dictionary_key ][ item[ 1 ] ]
+
+# increment placeholder to ensure that our data goes in the right place
+    place_holder += 2
+```
+
+Okay. Great. But how can we use this to actually do some interesting work?! Well, let's begin by looking at how we might use these as presets. To get started let's build out a simple little example. First we'll add a movie file in TOP and call it 'moviefilein_a', connect this to a mono TOP called 'mono_a', and finally to a level TOP called 'level_a'. We're going to build out two sets of modules on demand for this example. First up is a set of default parameters for our TOPs. This is going to make sure that we can come back to a default position in our presents where nothing is on / nothing has changed in our pipeline. The idea here is that we can figure out the values to make sure that our chain of TOPs is not having any affect on our input texture.
+
+```python
+level_defaults = {
+    "invert" : 0,
+    "blacklevel" : 0,
+    "brightness1" : 1,
+    "gamma1" : 1,
+    "contrast" : 1,
+    "gamma2" : 1,
+    "opacity" : 1,
+    "brightness2" : 1
+}
+
+mono_defaults = {
+    "mono" : 0,
+    "rgb" : 0,
+    "alpha" : 4
+}
+```
+
+Next let's build out a set of cues that we can use to configure our little chain of TOPs.
+
+```python
+cue_list = {
+    "cue1" : {
+        "file" : '/Map/Banana.tif',
+        "mono" : 0 ,
+        "invert" : 1,
+        "brightness" : 0.71,
+        "blacklevel" : 0.51,
+        "contrast" : 1.93 
+    } ,
+    "cue2" : {
+        "file" : '/Map/Smiley.tif',
+        "mono" : 1 ,
+        "invert" : 0,
+        "brightness" : 1,
+        "blacklevel" : 0.51,
+        "contrast" : 1.5 
+    } ,
+    "cue3" : {
+        "file" : '/Map/OilDrums.jpg',
+        "mono" : 0,
+        "invert" : 1,
+        "brightness" : 0.71,
+        "blacklevel" : 0.51,
+        "contrast" : 1.93 
+    }
+}
+```
+
+You'll notice that we've used two different approaches to name space here - that's intentional. In our defaults we can see that we've made sure our key names match exactly to the parameter names on our TOPs. In our cues we can see that we've deviated from that a little. Why? Well, this will let us look at two different ways that we can target parameters when we're using loops.

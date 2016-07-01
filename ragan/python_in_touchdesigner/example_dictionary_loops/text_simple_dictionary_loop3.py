@@ -1,5 +1,5 @@
 # define our variables
-# using modues means that we can use our dot notation to
+# using modules means that we can use our dot notation to
 # access an object inside of our text DAT
 inventory = mod( 'text_test_dictionary' ).inventory
 

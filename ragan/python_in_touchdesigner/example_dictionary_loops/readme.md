@@ -233,3 +233,5 @@ cue_list = {
 ```
 
 You'll notice that we've used two different approaches to name space here - that's intentional. In our defaults we can see that we've made sure our key names match exactly to the parameter names on our TOPs. In our cues we can see that we've deviated from that a little. Why? Well, this will let us look at two different ways that we can target parameters when we're using loops.
+
+If we look back to our experiments with .pars() in looking at for loops, you might rember that we were able to us .pars() to quickly fill in a constant CHOP by ensuring that the contents of our table matched in terms of parameter names. This time around we can do the same thing by using our dictionray as our data structure instead of a table. We can then also quickly loop throug the contents of our dictionary and assign values based on key names. 

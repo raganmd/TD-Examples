@@ -2,7 +2,7 @@
 
 ## Programmer / Artist ##
 
-**Matthew Ragan** | [ matthewragan.com](http://matthewragan.com)  
+**Matthew Ragan** | [matthewragan.com](http://matthewragan.com)  
 
 ## dictionary_loops_variables ##
 We've looked at dictionaries as data structures already, and have gotten a peak into how powerful then can be for storing and manipulating data. That's all well and good, but wouldn't it be lovely if we could loop through the contents of our dictionaries the same way we can loop through list items? 
@@ -139,6 +139,8 @@ for dictionary_key , dictionary_value in inventory.items():
 
 Alright, not bad. Not bad at all. Here we can see that we ended up with a loop nested inside of our first loop. We started by printing out keys, then we run another loop to print out items and their quantities. 
 
+## Recalling Presets ##
+
 Okay, this is all well and good but what can we do with our new found tricks? Let's start by doing something seemingly simple - filling out a table with the contents of our dictionary. Why put things into a table?! At some point you'll certainly want to fill up a table with the contents of a dictionary... so we might as well look at how to do this early on.
 
 ```python
@@ -234,4 +236,130 @@ cue_list = {
 
 You'll notice that we've used two different approaches to name space here - that's intentional. In our defaults we can see that we've made sure our key names match exactly to the parameter names on our TOPs. In our cues we can see that we've deviated from that a little. Why? Well, this will let us look at two different ways that we can target parameters when we're using loops.
 
-If we look back to our experiments with .pars() in looking at for loops, you might rember that we were able to us .pars() to quickly fill in a constant CHOP by ensuring that the contents of our table matched in terms of parameter names. This time around we can do the same thing by using our dictionray as our data structure instead of a table. We can then also quickly loop throug the contents of our dictionary and assign values based on key names. 
+If we [look back to our experiments with .pars()](https://matthewragan.com/2016/07/06/python-in-touchdesigner-for-loop-touchdesigner/) in looking at for loops, you might remember that we were able to us .pars() to quickly fill in a constant CHOP by ensuring that the contents of our table matched in terms of parameter names. This time around we can do the same thing by using our dictionary as our data structure instead of a table. We can then also quickly loop through the contents of our dictionary and assign values based on key names. 
+
+Let's look briefly at how that might work.
+
+First let's look at how we might build a string to execute:
+
+```python
+mono_defaults = mod( op( 'text_defaults' ) ).mono_defaults
+level_defaults = mod( op( 'text_defaults' ) ).level_defaults
+
+for keys, values in mono_defaults.items():
+    
+    #reset mono defaults for A 
+    exec( "op( 'mono_a' ).par." + keys + " = " + str( values ) )
+    
+    # debut print so you can see what this is actually doing
+    # print( "op( 'mono_a.par' )." + keys + " = " + str( values ) )
+
+for keys, values in level_defaults.items():
+            
+    #reset mono defaults for A 
+    exec( "op( 'level_a' ).par." + keys + " = " + str( values ) )
+```
+
+That works well, but as someone pointed out on the facebook help group, using exec() can cause a set of problems. It's useful to know that we can build an expression as a string, and then execute that command - all dynamically, but we can also use pars():
+
+```python
+mono_defaults       = mod( op( 'text_defaults' ) ).mono_defaults
+level_defaults      = mod( op( 'text_defaults' ) ).level_defaults
+
+for keys, values in mono_defaults.items():
+
+    #reset mono defaults for A 
+    op( 'mono_a' ).pars( keys )[ 0 ].val = values   
+    
+    # debut print so you can see what this is actually doing
+    # print( "op( 'mono_a.par' )." + keys + " = " + str( values ) )
+
+for keys, values in level_defaults.items():
+            
+#   #reset level defaults for A 
+    op( 'level_a' ).pars( keys )[ 0 ].val = values  
+```
+
+So far those seem like the same thing?! In this case, they're pretty close. Because our key name matches our parameter name things are pretty straightforward here. Where it gets complicated is when our key names and parameter names don't match. 
+
+Let's use our cue_list dictionary to see how it might be different. Let's imagine that we want to use cue2 as a preset. Now, because our key names and our parameter names don't match, we have to write something like this:
+
+```python
+movie_a                     = op( 'moviefilein_a' )
+mono_a                      = op( 'mono_a' )
+level_a                     = op( 'level_a' )
+cue_list                    = mod( op( 'text_cue_list' ) ).cue_list
+
+cue                         = 'cue2'
+
+movie_a.par.file            = app.samplesFolder + cue_list[ cue ][ 'file' ]
+mono_a.par.mono             = cue_list[ cue ][ 'mono' ]
+level_a.par.invert          = cue_list[ cue ][ 'invert' ]
+level_a.par.brightness1     = cue_list[ cue ][ 'brightness' ]
+level_a.par.blacklevel      = cue_list[ cue ][ 'blacklevel' ]
+level_a.par.contrast        = cue_list[ cue ][ 'contrast' ]
+```
+
+You'll notice in the example above, we have to specify how each key and parameter relate to one another. In some cases this might be desirable. How?! You might ask. Well, lets' imagine you have an AB system. In addition to our current set of operators, we'd also have movie_b, mono_b, and level_b. In this case it might be a little more tricky to know when to assign which parameter to which TOP. We might also end up in a situation where there are multiple level tops, so knowing when to target level1 vs. level2 might get a little more complicated. There are lots of ways you might solve these problems cleverly while still using pars(). It's also worth pointing out that sometimes you want to be explicit in your code (probably more often than not), so you know exactly what's happening. The important thing to remember here is that there's a balance to find. You might not find it the first time you write your function or for loop, and it's always okay to refactor your code to make it better. 
+
+Alright, let's put some of these skills to use in an interesting way! We've used dictionaries as data structures, and we just learned how to loop through dictionaries. Let's build out a set of buttons to recall our presets. I'm not going to go through how to make our buttons in detail - here are the cliff notes. Create a new container, add a button0 and give it the name "defaults", next setup a replicator network to make three presets. Let's make sure that our operator prefix is set to "preset" for our operator names when they get replicated. Finally, let's make sure our buttons are set to radio. If all of this sounds like greek to you, make sure you go back and look at how replicators work first, and then look inside the example panel to get a better sense of how I set things up.
+
+Okay! Now we'll use a panel execute DAT (we just learned about panel executes) to recall our presets. We'll use a logic test to run different loops depending on which button is pressed. In our case, Preset 1 - 3 will fill in our chain of operators with the presets from our cue_list dictionary. Clicking in the defaults button will return our chain of operators back to its default state. We can use the scripts we already wrote, and use the panel idea of the radio button selected to make this work. Let's look at what that looks like:
+
+```python
+# me - this DAT
+# panelValue - the PanelValue object that changed
+# 
+# Make sure the corresponding toggle is enabled in the Panel Execute DAT.
+
+mono_defaults       = mod( op( 'text_defaults' ) ).mono_defaults
+level_defaults      = mod( op( 'text_defaults' ) ).level_defaults
+
+movie_a             = op( 'moviefilein_a' )
+mono_a              = op( 'mono_a' )
+level_a             = op( 'level_a' )
+cue_list            = mod( op( 'text_cue_list' ) ).cue_list
+
+def offToOn(panelValue):
+    return
+
+def whileOn(panelValue):
+    return
+
+def onToOff(panelValue):
+    return
+
+def whileOff(panelValue):
+    return
+
+def valueChange(panelValue):
+    # default radio button
+    if panelValue == 0:
+        for keys, values in mono_defaults.items():
+            #reset mono defaults for A 
+            op( 'mono_a' ).pars( keys )[ 0 ].val = values   
+            
+        for keys, values in level_defaults.items():                 
+        #   #reset level defaults for A 
+            op( 'level_a' ).pars( keys )[ 0 ].val = values  
+
+    # for any of our preset buttons
+    else:
+        cue = 'cue' + str( panelValue )
+
+        movie_a.par.file            = app.samplesFolder + cue_list[ cue ][ 'file' ]
+        mono_a.par.mono             = cue_list[ cue ][ 'mono' ]
+        level_a.par.invert          = cue_list[ cue ][ 'invert' ]
+        level_a.par.brightness1     = cue_list[ cue ][ 'brightness' ]
+        level_a.par.blacklevel      = cue_list[ cue ][ 'blacklevel' ]
+        level_a.par.contrast        = cue_list[ cue ][ 'contrast' ]
+    
+    return 
+```
+
+I know it's seems like it's been a long journey, but we're now starting to see the real power of python in TouchDesigner. 
+
+## Auto Configuration ##
+
+
+## JSON ##

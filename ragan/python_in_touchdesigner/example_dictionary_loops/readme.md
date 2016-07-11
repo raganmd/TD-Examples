@@ -360,6 +360,54 @@ def valueChange(panelValue):
 I know it's seems like it's been a long journey, but we're now starting to see the real power of python in TouchDesigner. 
 
 ## Auto Configuration ##
+Let's quickly remember that with the [Op Class we saw how we could create and destroy nodes](https://matthewragan.com/2016/07/06/python-in-touchdesigner-op-class-touchdesigner/). If we combine that with what we've just learned about using data structures and loops, we can begin to look at how we can automate the organization of a network. 
 
+Let's imagine that we want to create a one toe file, and then depending on the IP address of a given machine we want TouchDesigner to set up different configurations. On one machine we might have two projectors, another might have three, another still might be our control machine. How can we make this work? Well, in this case we can store all of that information in a data structure like a python dictionary (you might also use JSON, or XML, or any data structure that you like). Next we'll create a table based on our IP address, next we'll loop through that table and then create our operators. Once you get a feeling for how this works with a table, you'll quickly see how you could skip that step and just do this from the loop itself.
+
+At the heart of this idea is the fact that you can store settings in your data structure, then build out your network based on that information. Alright, let's dig in and get started.
+
+A few things to keep in mind. Your IP address is going to matter. Remember that as you follow long here you'll need to use your own IP address. You'll notice that I've put a "default" address into a text DAT... this is so we can practice, but if you're going to use this idea on a project you'll need to familiarize yourself with the IP addresses, and have some control over how your machines are addressed. 
+
+Okay, to get started lets look at the configuration data we've set up:
+
+```python
+uri = {
+    "10.0.0.2" : {
+        "name" : "mission_control" ,
+        "role" : "controller" ,
+        "displays" : [
+            "control01" 
+        ]
+    },
+    "10.0.0.3" : {
+        "name" : "eyes" ,
+        "role" : "node" ,
+        "displays" : [
+            "projector01" , 
+            "projector02" 
+        ]
+    }
+}
+
+displays = {
+    "control01" : {
+        "width" : 1920 ,
+        "height" : 1080 ,
+        "orientation" : 0
+    },
+    "projector01" : {
+        "width" : 1920 ,
+        "height" : 1080 ,
+        "orientation" : 0
+    },
+    "projector02" : {
+        "width" : 1920 ,
+        "height" : 1080 ,
+        "orientation" : 1
+    }
+}
+```
+
+At a glance we can see that we're working with two dictionaries - one called *uri* and the other called *displays*. These dictionaries have their own dictionaries nested inside, and have lists embedded inside as well. What's going on here?! Our URI (uniform resource identifier)
 
 ## JSON ##

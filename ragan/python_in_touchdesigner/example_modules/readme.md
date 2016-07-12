@@ -16,6 +16,37 @@ The MOD class provides access to Module On Demand object, which allows DATs to b
 
 What does this mean? It's hard to sum up in just a single sentence, but the big thing to take away is that we can essentially use any text DAT to hold whole functions for us that we can then call whenever we want.
 
-Let's take a closer look at this process.
+Let's take a closer look at this process. We'll start with some simple ideas, then work our way up to something a little more complicated.
+
+First we turn things way down, and just think about storing variables. To be clear, we probably wouldn't use this in a project, but it can be helpful for us when we're trying to understand what exactly is going on here.
+
+Let's create a new text DAT and call it "text_variables", inside let's put the following text:
+
+```python
+width       = 1280
+height      = 720
+
+budget      = 'small'
+```
+
+Using the mod class we can access these variables in other operators! To do this we'll use the following syntax:
+
+```python
+mod( 'text_variables' ).width
+mod( 'text_variables' ).height
+mod( 'text_variables' ).budget
+```
+
+Try adding a constant CHOP, and a text TOP to your network and using the expressions above to retrieve these values.
+
+Next try printing these values:
+
+```python
+print( mod( 'text_variables' ).width )
+print( mod( 'text_variables' ).height )
+print( mod( 'text_variables' ).budget )
+```
+
+
 
 

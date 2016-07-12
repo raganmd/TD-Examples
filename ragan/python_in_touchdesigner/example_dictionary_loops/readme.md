@@ -408,6 +408,170 @@ displays = {
 }
 ```
 
-At a glance we can see that we're working with two dictionaries - one called *uri* and the other called *displays*. These dictionaries have their own dictionaries nested inside, and have lists embedded inside as well. What's going on here?! Our URI (uniform resource identifier)
+At a glance we can see that we're working with two dictionaries - one called *uri* and the other called *displays*. These dictionaries have their own dictionaries nested inside, and have lists embedded inside as well. What's going on here?! Our URI (uniform resource identifier) is a string key that corresponds to an IP address on a given machine. This key's value pair is a dictionary instead of a single value. The contents of this dictionary are a name, a role, and a list of displays. For more complex configurations you might a much larger number of keys, but for now this should help us see what we're up to. We also have a dictionary of displays. These contain keys related to resolution and orientation. 
+
+Alright, let's put this information to good use. Before we get started we're going to first add two more operators to our network. A table DAT called *table_replicator_info* and a text DAT called *text_default_ip*. We will fill in our table with the contents from our for loop process. For now we will use our default IP to see how this works.
+
+Okay! Now let's write a script to build out a network of ops:
+
+```python
+# import any necessary modules
+
+import socket
+
+# define some variables
+
+pos_x               = 3300
+pos_y               = 0
+replicator_table    = op( 'table_replicator_info' )
+system_config       = mod( 'text_data' ).uri
+displays            = mod( 'text_data' ).displays
+local_ip            = socket.gethostbyname( socket.gethostname() )
+default_ip          = op( 'text_default_ip' ).text
+local_config        = {}
+container_COMPs     = parent().findChildren( type = COMP , depth = 1 )
+
+# clear contents of replicator_table
+replicator_table.clear()
+
+# delete existing container COMPs
+for items in container_COMPs:
+    if op( items ).name != 'container_presets':
+        op( items ).destroy()
+    else:
+        pass
+
+# Test for local_ip in system config
+in_system_config = local_ip in system_config
+
+# if our IP matches with a URI in the system config, then we
+# fill our dictionary with keys based on the system config file
+if in_system_config == True:
+    local_config[ 'name' ]      = system_config[ local_ip ][ 'name' ]
+    local_config[ 'role' ]      = system_config[ local_ip ][ 'role' ]
+    local_config[ 'displays' ]  = system_config[ local_ip ][ 'displays' ]
+    local_config[ 'uri' ]       = local_ip
+
+# if our IP doesn't match our system config file, then we fill our
+# dictionary with keys based on the default IP address, which is 
+# entered in the text dat called 'text_default_ip'
+else:
+    # assign ip address
+    local_ip = default_ip
+    local_config[ 'name' ]      = system_config[ local_ip ][ 'name' ]
+    local_config[ 'role' ]      = system_config[ local_ip ][ 'role' ]
+    local_config[ 'displays' ]  = system_config[ local_ip ][ 'displays' ]
+    local_config[ 'uri' ]       = local_ip
+
+# fill table with display information
+for items in local_config[ 'displays' ]:
+    replicator_table.appendRow( [ 
+        items , 
+        displays[ items ][ 'width' ] , 
+        displays[ items ][ 'height' ] , 
+        displays[ items ][ 'orientation' ] 
+        ] )
+
+# check and correct height / width based on orientation flag
+for row in range( replicator_table.numRows ):
+    # create a temporary variable to store the width and height of the display
+    width_height = [ replicator_table[ row , 1 ].val , replicator_table[ row , 2 ].val ]
+
+    # test for orientation flag
+    # if true, swap height and width
+    if replicator_table[ row , 3 ] ==  1:
+        replicator_table[ row , 1 ] = width_height[ 1 ]
+        replicator_table[ row , 2 ] = width_height[ 0 ]
+
+    # if false, we pass and do nothing
+    else:
+        pass
+
+# create container COMPs based on our replicator table
+for row in range( replicator_table.numRows ):
+    # create our new container COMP, give it a name from our replciator table
+    new_op = parent().create( containerCOMP , replicator_table[ row , 0 ] )
+    
+    # set the x position of the new container
+    new_op.nodeX = pos_x
+    
+    # set the y position of the new container
+    new_op.nodeY = pos_y
+
+    # set the width of the new node based on the replicator table
+    new_op.par.w = replicator_table[ row , 1 ]
+
+    # set the height of the new node based on the replicator table
+    new_op.par.h = replicator_table[ row , 2 ]
+
+    # turn on the viewer flag
+    new_op.viewer = True
+
+    # increment the y position for the next loop
+    pos_y -= 200
+```
+
+Why not just use a replicator?! That's an excellent question. This might work just as well using a replicator - but, if we want to know exactly what order a set of operations happens in, and if we want to control when that operation fires then we need to write out a script to do just what we want. It might well seem like some additional work, but being able to work through the process line by line is worth at least learning even if you don't end up using it much.
 
 ## JSON ##
+
+JSON, as a format is very similar to python dictionaries, so similar in fact there's a very simple way to work with it. 
+
+If you're already working with dictionaries this will feel like an easy transition. There are, however, a few things you need to keep in mind.
+
+We need to make sure that our JSON is correctly formatted. If you compare the in our final example, with our first example you can see that we've enclosed our entire dictionary in curly brackets {}. You can also see that we've replaced our first variable with a key-value pair.
+
+Let's take a closer look:
+
+```python
+# First we need to import the json module. 
+
+import json
+
+# next we're going to use just the text from our text dat
+imported_dict       = op( 'text_simple_json' ).text
+
+# next we'll use json.loads to import that as a python dictionary
+dict_from_json      = json.loads( imported_dict )
+
+# first let's just print the dictionary to make sure things worked out
+print( "Here is our whole json object" )
+print( imported_dict )
+
+print( '_ ' * 10 )
+
+# next we could print just the top tier keys
+print( "Here are our top tier keys" )
+for item in dict_from_json.keys():
+    print( item )
+
+print( '\n' )
+print( '_ ' * 10 )
+# next let's print the keys in our 'inventory' dictionary
+print( "Here are the keys in inventory" )
+for item in dict_from_json[ 'inventory' ].keys():
+    print( item )
+    
+print( '\n' )
+print( '_ ' * 10 )
+# since we're on a roll, let's first print our keys, and
+# then print their values
+print( "Here are the keys and values in inventory" )
+for key, value in dict_from_json[ 'inventory' ].items():
+    print( key, 'contains', value )
+
+print( '\n' )
+print( '_ ' * 10 )
+# That's still not very pretty, so let's see if we can make 
+# something that's a little nicer
+print( "Pretty printing our keys and values" )
+for key, value in dict_from_json[ 'inventory' ].items():
+    print( key, 'contains' )
+    
+    for item, quantity in value.items():
+        print( quantity, item )
+    
+    print( '\n' )
+```
+
+With some easy ways to work with dictionaries under your belt challenge yourself to use these in an interesting way!

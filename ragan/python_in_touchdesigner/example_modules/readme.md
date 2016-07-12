@@ -47,6 +47,28 @@ print( mod( 'text_variables' ).height )
 print( mod( 'text_variables' ).budget )
 ```
 
+So, it looks like we can access the contents of a module as a means of storing variables. That's hip. Let's take a moment and circle back to one of the other use cases that we've already seen for a module. More than just a single value, we can also put a whole dictionary in a module and then call it on demand. We've already done this in some of our previous examples, but we can take a quick look at that process again to make sure we understand.
 
+Let's create a new text DAT called "text_dictionary_as_module", inside of this text DAT let's define the following dictionary:
 
+```python
+fruit = {
+    "apple" : 10,
+    "orange"    : 5,
+    "kiwi"  : 16
+}
+```
 
+Let's first print the whole dictionary object:
+
+```python
+print( mod( 'text_dictionary_as_module' ).fruit )
+```
+
+Alternatively, we can also access individual keys in the dictionary:
+
+```python
+mod( 'text_dictionary_as_module' ).fruit[ 'apple' ]
+mod( 'text_dictionary_as_module' ).fruit[ 'orange' ]
+mod( 'text_dictionary_as_module' ).fruit[ 'kiwi' ]
+```

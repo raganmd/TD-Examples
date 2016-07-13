@@ -14,6 +14,8 @@ Current Second		| {second}
 Current Microsecond	| {microsecond}
 '''
 
+raw_date_time 		= "On {month}-{day}-{year} at {hour}:{minute}:{second}"
+
 verbose_log_message	= '''============================
 VERBOSE MESSAGE
 
@@ -27,8 +29,6 @@ Logged
 {message}
 ============================
 '''
-
-raw_date_time 		= "On {month}-{day}-{year} at {hour}:{minute}:{second}"
 
 log_message			= '''----------------------------
 {now}
@@ -167,17 +167,34 @@ class Ext_example():
 		else:
 			pass
 
+		# save the log file to disk - external from the TouchDesigner project	
 		self.Save_log()
 
 		return
 
 	def Save_log( self ):
+		'''Saves log to disk.
+
+		This helper function saves the log file to disk.
+
+		Notes
+		---------------
+		None
+		'''
 
 		op( log_file ).save( log_path )
 
 		return
 
 	def Clear_log( self ):
+		'''Clears Log File.
+
+		This helper function clears the text dat used to hold the log file.
+
+		Notes
+		---------------
+		None
+		'''
 
 		op( log_file ).clear()
 

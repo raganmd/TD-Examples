@@ -1,102 +1,20 @@
 
-----------------------------
-2016-07-13 15:16:56.684866
-----------------------------
-text2
-/python_in_touchdesigner/example_extensions/text2
-hello
-
-----------------------------
-2016-07-13 15:36:50.560742
-----------------------------
-text2
-/python_in_touchdesigner/example_extensions/text2
-hello sexy
-
-----------------------------
-2016-07-13 15:37:20.206598
-----------------------------
-text2
-/python_in_touchdesigner/example_extensions/text2
-hello sexy
-
-----------------------------
-2016-07-13 15:37:44.726523
-----------------------------
-text2
-/python_in_touchdesigner/example_extensions/text2
-hello monster
-
-----------------------------
-2016-07-13 15:39:02.519287
-----------------------------
-text2
-/python_in_touchdesigner/example_extensions/text2
-hello monster
-
-----------------------------
-2016-07-13 15:39:15.976608
-----------------------------
-text2
-/python_in_touchdesigner/example_extensions/text2
-hello monster 2
-
-----------------------------
-2016-07-13 15:40:03.020526
-----------------------------
-text2
-/python_in_touchdesigner/example_extensions/text2
-hello monster 2
-
-----------------------------
-2016-07-13 15:40:21.060558
-----------------------------
-text2
-/python_in_touchdesigner/example_extensions/text2
-hello monster 3
-
 ============================
 VERBOSE MESSAGE
 
-On 7-13-2016 at 15:47:50
+On 7-14-2016 at 10:35:10
 ----------------------------
-operator			|| text2
-At Network Location	|| /python_in_touchdesigner/example_extensions/text2
+operator			|| constant1
+At Network Location	|| /python_in_touchdesigner/example_extensions/constant1
 
 ----------------------------
 Logged
-hello monster 3
-============================
-
-============================
-VERBOSE MESSAGE
-
-On 7-13-2016 at 15:48:33
-----------------------------
-operator			|| text2
-At Network Location	|| /python_in_touchdesigner/example_extensions/text2
-
-----------------------------
-Logged
-hello monster verbose
-============================
-
-============================
-VERBOSE MESSAGE
-
-On 7-13-2016 at 15:57:53
-----------------------------
-operator			|| text2
-At Network Location	|| /python_in_touchdesigner/example_extensions/text2
-
-----------------------------
-Logged
-hello monster verbose
+This is operator needs attention
 ============================
 
 ----------------------------
-On 7-13-2016 at 15:59:11
+On 7-14-2016 at 10:35:16
 ----------------------------
-text2
-/python_in_touchdesigner/example_extensions/text2
-hello monster verbose
+constant1
+/python_in_touchdesigner/example_extensions/constant1
+This is operator needs attention

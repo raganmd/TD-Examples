@@ -1,0 +1,1 @@
+parent().Clear_log()

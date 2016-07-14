@@ -125,6 +125,17 @@ class Ext_example():
 		text_port_print( bool ) - a toggle to print to the text port, or not
 		append_log( bool ) - a toggle to append to the log file , or not
 
+		Example
+		---------------	
+		target_op		= op( 'constant1' )
+		message 		= "This operator needs attention"
+
+		parent().Log_message( target_op, message )
+
+		also
+
+		parent().Log_message( target_op, message, verbose = True )
+
 		Returns
 		---------------
 		None
@@ -139,6 +150,7 @@ class Ext_example():
 		path 		= operator.path
 		op_name 	= operator.name
 
+		# logic tests for verbose or compact
 		if verbose:
 			message = verbose_log_message.format(
 													date_time 	= self.Log_date_time(),
@@ -155,12 +167,14 @@ class Ext_example():
 											message 			= message
 										)
 		
+		# logic tests for text_port_print
 		if text_port_print:
 			print( message )
 		
 		else:
 			pass
 
+		# log tests for appending log
 		if append_log:
 			log_file.write( '\n' + message )
 

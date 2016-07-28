@@ -446,3 +446,13 @@ Rather than using two sliders and trying to toggle their click-through on and of
 Starting with this simple two knob concept we can quickly see how we might scale up to an even larger number of knobs in the future. The big idea here is to think of writing the insideu value of our parent container into a constant, which is then used to determine the x coordinate of the knob. 
 
 We also want to build this smartly so it only cooks when we're actually interacting with this element. That may seem obvious, but it can be a tricky undertaking in touch. 
+
+### base_switch_chop ###
+_**7.28.16**_
+
+**Original post / question**
+
+>how can i use a switch chop to export pre-defined rgb values from a dat file? for example if the index in switch chop is 1 it`s going to export say 1,0,0.5 values into a rgb field , if 2: 1,2,0.7 and so on, sorry if this is easy i am just new to this software
+>
+
+There are a lot of potential ways to solve this problem, and how you approach it depends a lot on how your network is layed out, and how the incomming data is strucutred. Here are a handful of examples that you might look over to give you some ideas.

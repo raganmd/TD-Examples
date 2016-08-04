@@ -456,3 +456,27 @@ _**7.28.16**_
 >
 
 There are a lot of potential ways to solve this problem, and how you approach it depends a lot on how your network is layed out, and how the incomming data is strucutred. Here are a handful of examples that you might look over to give you some ideas.
+
+### base_points_from_table ###
+_**8.4.16**_
+
+**Original post / question**
+
+>import a fragment of a point cloud and try a simple single axis displacement on the points. I'd love to make a normalized slider (0-tz say) and slide from flat to full 3-d or just flatten the damn thing but i cant even get the transform to do anything except +/- all point on the z. 
+>
+
+There are lots of ways to make geometry out of the data, and it can often be difficult to point someone in a specific direction since the approach may vary from case to case. 
+
+With that in mind we can look at two different starting places for how to turn a text file with points into something that we can render. A disclaimer to get ust started. I made this table of points with a noise CHOP. I used a simple script to copy the contents of the CHOP into a table. This doesn't make for anything too fancy looking, but does give us some starting data to work from.
+
+To get started with we can use the add SOP to quickly convert out table into geometry. The format here is a column per attribute - tx, ty, tz. Points are easy, and with just two operators we can see that we've got a set of points in touch. TaDa!
+
+That's great, but what to do with this?
+
+_**base_points**_
+One thing we might do is just convert this data into a set of joined points... we could make a line. We can do this with the polygons page of the add SOP. Now we have a line. In this example we render that with a constant material.
+
+_**base_points_instances**_
+This is great, but what if we want something more closely resenbling a set of objects in space? We might instead opt to use some instancing to create this look. We can do this by converting our DAT into a CHOP and then using this as instance look up channels. But Matt, you can use a table for instances... what gives? That's very true. You can use a table for instances, but if you want to do any kind of animation in your instances you'll be much happier (you'll have better performance) working with CHOP channels than with performing math operations on a Table.
+
+What does that mean? Use the buttons in container1 to change the switch position and see what different transformations to our channel data might look like in our instances.

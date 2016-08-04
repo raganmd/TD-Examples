@@ -487,13 +487,12 @@ _**8.3.16**_
 **Original post / question**
 
 >I have a follow up question about replicator comps. I have my UI successfully being built now, but now I want to create a table storing the values from the "out" nodes of each item the replicator comp creates. Can't figure it out.
---
-a CHOP or DAT execute DAT that's set to target the correct table location will do the trick.
---
-Thanks! Forgive my ignorance, but how do I target a table location?
+
+>a CHOP or DAT execute DAT that's set to target the correct table location will do the trick.
+
+>Thanks! Forgive my ignorance, but how do I target a table location?
 For eg.
 There are 10 items currently created by the replicator comp. I want the string value of each items "out" node updated to a table in the row order based on the items number?
->
 
 In the panel execute we can target the panels of all operators in this part of the network with the * wildcard.
 

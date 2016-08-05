@@ -508,7 +508,6 @@ Next we need to figure out how that corresponds to a table.
        return
 ```
 
-
 Here it's important to realize that panelValue is actually an object.
 http://www.derivative.ca/wiki088/index.php?title=PanelValue_Class
 
@@ -527,3 +526,22 @@ This script would change the value of a cell to 1. Instead we want to change the
        op( 'table_save' )[ panelValue.owner.digits, 1 ] = panelValue
        return
 ```
+
+### container_write_button_vals_to_table ###
+_**8.3.16**_
+
+>Hello again group!
+
+>I'm having an issue with a cook dependency loop that I'm not sure how to address. I'm pretty sure there's an easy fix that won't affect performance but it's not one I'm able to think up unfortunately!
+
+>Thanks!
+
+I've been thinking a lot about this challenge today, and I think this is probably how I'd consider tackling this.
+
+Some general thoughts - the math operation of changing scaling is pretty fast 0.006 ms with 5 channels, at 500 channels it's only 0.025 ms. That's fast enough that I don't think this is a place to look for much additional optimization. Even at 5000 channels it's still only weighing in at 0.2 ms.
+
+In this simplified example, we're setting a variable for requesting a change in ramp direction with our radio buttons, and then indicating a state (in this case positive or negative). We use a logic operation to test for when both the request and pulse conditions are true. When they're true, we change the the torange1 and torange2 parameters on the math CHOP, and reset the request state of our constant.
+
+I think this is getting closer to what you're after. In looking at your earlier example, you had some python expressions in some parameters of your beat CHOP. I think I'd try to avoid that if you can. Adding expressions that are evaluated every frame to your parameters can cause slow downs that are difficult to debug, and can come back to bite you later.
+
+Hope this helps

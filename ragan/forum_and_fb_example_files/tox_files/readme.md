@@ -545,3 +545,21 @@ In this simplified example, we're setting a variable for requesting a change in 
 I think this is getting closer to what you're after. In looking at your earlier example, you had some python expressions in some parameters of your beat CHOP. I think I'd try to avoid that if you can. Adding expressions that are evaluated every frame to your parameters can cause slow downs that are difficult to debug, and can come back to bite you later.
 
 Hope this helps
+
+### container_multi_schnapper ###
+_**9.7.16**_
+
+**Original post / question**
+
+>i replicated my setup here. So, There are 4 camSchnapprs going into four 1080 render TOPS. In each camschnappr I want to be able to turn on the output monitor mapping setting from 1 to 4 when it's time to use them on each of my 360 projection object faces in real life . The problem is that i have only one physical ouput that's going out of my computer into a datapath that mimics the 3840x2160 window splitted exactly like the window COMP I am sending out. What do I have to do to be able to turn each camSchnappr's output mapping tool onto the corresponding face in real life, not on the whole single ouptut that the computer detects?
+
+Okay... I think I understand what's going on here. Richard Burns and Bruce Wheaton have nailed some of the finer points here in this challenging concept. 
+
+To it, it seems like you need to also have a means of controlling when you're seeing model output, and when you're seeing schnappr output. I'm assuming here that you're running this on a single box, and that you don't need to control this remotely - that's a whole difference set of challenges.
+
+It's also worth remembering that render pass TOPs are much more efficient than additional render TOPs. I've used a select COMP to compensate for the challenges of screen space / world space. This should allow you to still interact with the mechanics of the schnappr while also preserving the display elements that are inherent to that element.
+
+Here's a fast example that's a place I'd start working from:
+container_final_output is all four schappr windows... for me that's four containers at 1920 x 1200... which is my second monitor's resolution. You might have to do some hard coding to get this to break up correctly for the data-path. These have a select from the final camera output, as well as a selected panel comp from inside schappr. Using the UI buttons in the network will turn on the display of schnappr in a given window, and open the control window. Clicking the off button will close all the scnappr windows and close all the calibration displays. 
+
+I would suspect that there are a number of things about this that aren't totally right, but it's a place to start, and hopefully it'll give you some ideas about other ways to approach this problem.

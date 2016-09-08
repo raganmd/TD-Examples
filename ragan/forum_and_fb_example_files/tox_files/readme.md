@@ -563,3 +563,22 @@ Here's a fast example that's a place I'd start working from:
 container_final_output is all four schappr windows... for me that's four containers at 1920 x 1200... which is my second monitor's resolution. You might have to do some hard coding to get this to break up correctly for the data-path. These have a select from the final camera output, as well as a selected panel comp from inside schappr. Using the UI buttons in the network will turn on the display of schnappr in a given window, and open the control window. Clicking the off button will close all the scnappr windows and close all the calibration displays. 
 
 I would suspect that there are a number of things about this that aren't totally right, but it's a place to start, and hopefully it'll give you some ideas about other ways to approach this problem.
+
+### container_sliders_change_ramp_keys ###
+_**9.8.16**_
+
+**Original post / question**
+
+>Maybe a stupid question but still.. How can i map the Ramp key values to a chop , for example to change the position of a key with a controller . I tried to type an expression into the ramp key cell but i didn't work.
+
+Took a fast pass at making an example here. A set of sliders in container1 are used to change the position of a ramp key, as well as the rgba values.
+
+The big idea in the sliders is that a replicator makes the sliders and assigns them labels. A select CHOP pulls all of the out channels from the items and then renames them to a simple v1-5 naming schema. This is used to change the position values of the ramp keys.
+
+The oneliner that's making it work looks like this:
+
+```python
+op( '../ramp1_keys' )[ 2, int( channel.name[1:] ) - 1 ] = val
+```
+
+Taking that appart we can see that ../ramp1_keys is the operator we're targeting to make a change to. We change the row in the 2 position (I inserted a row into a normal ramp TOP). We can determine which column is going to change by getting the digit associted with the channel name (v1, v2, v3, v4, v5) by starting after the first letter, and casting that string as an integer. We subtract 1 to compensate for the fact that our items start at 1 instead of 0, then we set the value of the target cell to be value of the channel that's changed.

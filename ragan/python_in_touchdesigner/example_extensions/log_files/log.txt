@@ -1,0 +1,20 @@
+
+============================
+VERBOSE MESSAGE
+
+On 7-14-2016 at 10:35:10
+----------------------------
+operator			|| constant1
+At Network Location	|| /python_in_touchdesigner/example_extensions/constant1
+
+----------------------------
+Logged
+This is operator needs attention
+============================
+
+----------------------------
+On 7-14-2016 at 10:35:16
+----------------------------
+constant1
+/python_in_touchdesigner/example_extensions/constant1
+This is operator needs attention

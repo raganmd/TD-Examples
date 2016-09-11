@@ -1,5 +1,5 @@
 # define our variables
-# using modues means that we can use our dot notation to
+# using modules means that we can use our dot notation to
 # access an object inside of our text DAT
 inventory = mod( 'text_test_dictionary' ).inventory
 
@@ -13,5 +13,7 @@ for item in dictionary_keys:
 
 # loop through list and print the key and its
 # list position
+sentence = "The key {key} is in the {position} position of the list"
+
 for item in dictionary_keys:
-	print( "The key %r is in the %r position of the list" % ( item[ 1 ] , item[ 0 ] ) )
+	print( sentence.format( key = item[ 1 ] , position = item[ 0 ] ) )

@@ -4,7 +4,7 @@ import socket
 
 # define some variables
 
-pos_x				= 2400
+pos_x				= 3300
 pos_y				= 0
 replicator_table	= op( 'table_replicator_info' )
 system_config		= mod( 'text_data' ).uri

@@ -582,3 +582,31 @@ op( '../ramp1_keys' )[ 2, int( channel.name[1:] ) - 1 ] = val
 ```
 
 Taking that appart we can see that ../ramp1_keys is the operator we're targeting to make a change to. We change the row in the 2 position (I inserted a row into a normal ramp TOP). We can determine which column is going to change by getting the digit associted with the channel name (v1, v2, v3, v4, v5) by starting after the first letter, and casting that string as an integer. We subtract 1 to compensate for the fact that our items start at 1 instead of 0, then we set the value of the target cell to be value of the channel that's changed.
+
+### container_sliders_change_ramp_keys ###
+_**9.12.16**_
+
+**Original post / question**
+
+>I'd like to animate objects along paths using SOPs and not Geo COMPs, since I'm feeding SOPs into a Scan CHOP and later to the etherdream CHOP.
+
+>I tried using the Object merge SOP (to bring the animated geoCOMP back to a SOP) but it only grabs the transformation parameters and not the path animation data...
+
+>Any ideas?
+
+It's a bit of a hack, but you can always use a Null COMP that's animated along a path, extract the position data with an Object CHOP, and then apply this to your SOP with a transform.
+
+A bit ugly, but it does allow you to both use path as a concept, and transform a SOP.
+
+### container_sliders_change_ramp_keys ###
+_**9.12.16**_
+
+**Original post / question**
+
+>I'd like to animate objects along paths using SOPs and not Geo COMPs, since I'm feeding SOPs into a Scan CHOP and later to the etherdream CHOP.
+
+>I tried using the Object merge SOP (to bring the animated geoCOMP back to a SOP) but it only grabs the transformation parameters and not the path animation data...
+
+>Any ideas?
+
+Maybe a cleaner approach would be to convert your path geometry to a CHOP, then use a lookup chop to find position before applying this to your transform SOP.

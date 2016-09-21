@@ -583,7 +583,7 @@ op( '../ramp1_keys' )[ 2, int( channel.name[1:] ) - 1 ] = val
 
 Taking that appart we can see that ../ramp1_keys is the operator we're targeting to make a change to. We change the row in the 2 position (I inserted a row into a normal ramp TOP). We can determine which column is going to change by getting the digit associted with the channel name (v1, v2, v3, v4, v5) by starting after the first letter, and casting that string as an integer. We subtract 1 to compensate for the fact that our items start at 1 instead of 0, then we set the value of the target cell to be value of the channel that's changed.
 
-### container_sliders_change_ramp_keys ###
+### base_sop_along_path ###
 _**9.12.16**_
 
 **Original post / question**
@@ -598,7 +598,7 @@ It's a bit of a hack, but you can always use a Null COMP that's animated along a
 
 A bit ugly, but it does allow you to both use path as a concept, and transform a SOP.
 
-### container_sliders_change_ramp_keys ###
+### base_sop_path_by_look_up ###
 _**9.12.16**_
 
 **Original post / question**
@@ -610,3 +610,53 @@ _**9.12.16**_
 >Any ideas?
 
 Maybe a cleaner approach would be to convert your path geometry to a CHOP, then use a lookup chop to find position before applying this to your transform SOP.
+
+### container_simple_bouncing_ball ###
+_**9.10.16**_
+
+**Original post / question**
+
+>Hello,
+
+>I've been wanting to do some simple custom physics for a while, but have not been able to do so yet. I keep coming back to the Nature of Code -book by Dan Shiffman.
+
+>Would it make any sense trying to port this: [http://natureofcode.com/book/chapter-1-vectors/] to this: [https://www.derivative.ca/wiki088/index.php?title=Vector_Class]
+
+>Python is slow right? Trying to do that with networks of CHOPS is probably slower. Importing javascript would probably be a quick process(if it's possible??), but whatever style, i'd need it to perform with a decent fps too.
+
+>Any tips for a simulation newb?
+
+CHOPs would be a fast way to do this since they're essentially just C++ with some exposed parameters.
+
+CHOP math, generally speaking, is very fast - for the vast majority of movement operations it's an excellent place to start, unless you're wanting to calculate the vectors of millions of particles. When you start to look at doing particle simulations, then GLSL is the place to look. If you look in the pallet you can find a GL particle example to pull apart.
+
+Here's a start with the most rudimentary approach that Shiffman describes - where direction changes when a location value exceeds the bounds of the texture.
+
+This example is all CHOP math and exports - you'll also notice that the circle itself isn't doing the transform operations, but rather another Transform TOP. This is slightly faster as the circle TOP is responsible for rendering the circle and it's transformation. This difference is largely inconsequential, but is slightly faster at the cost of using a little more VRAM.
+
+### base_instance_feedback ###
+_**9.16.16**_
+
+**Original post / question**
+
+>Hello, So after messing around for long time with a dk2 not working on windows 10, apparently works with windows 7 with touch designer. Almost through it by window! (why develop runtime on older os that is good question)
+
+>Anyways, I got a vive second hand (cheaper than you would expect since lots computers no powerfull enough people just resell straigh away). It works amazing specially with touch designer,the example files available on wiki work a treat.
+
+>Since I use a lot of feedback in my projects in usual projects;
+
+>I was wondering if any other users figured out if its possible to get feedback 2d effect transformed to 3d somehow. VR feedback it that even possible>? or totally impossible.
+thx sorry if it is a stupid question.
+
+>There must be a way of having a trail of instances following a moving object or something like white trails growing from tips of geometry slowly dispaering. Anything that could point me in vague direction of where I can find that sort of info would be helpfull.
+maybe using particle as instance source and move geo and particle source at same time. I'll try that
+
+>Cool no worries, I'll try posting these posts in Aquariophil forum, see if I have more luck!
+
+A couple things here that make this work.
+
+Instancing is set up to use a trail CHOP that's being populated by a noise CHOP. This could any kind of input, you just need the xyz coordinates to make that all work. Because a trail CHOP is inherently constructed with time in mind - recent being on the far right, the past being on the far left, we can use a ramps and patterns to describe what happens over the course of time. Here we can see that as samples get older they both shrink, and change color. There's an info CHOP pull the number of samples from the trail to feed the ramp and pattern lengths. The null that exports these to other ops selectively cooks, so you should only see those update if you change the length of the trail.
+
+There's a render pass situation happening here to support the compositing in a way that feels like old school feedback. 
+
+The camera is animated to help give a sense of how this works in 3D.

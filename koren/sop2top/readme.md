@@ -5,6 +5,7 @@ For best results use same particle count in every file.
 If not possible make sure the first frame contain the max number of particles in your sequence (it will work but introduce flickering) .
 
 Tested only with Houdini .bhclassic format files.
+
 Link to the particles files :
 https://1drv.ms/u/s!AtOqq6vc31EFgYEz58IoUxm2iV3-Rg
 

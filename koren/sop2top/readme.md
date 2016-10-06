@@ -4,8 +4,11 @@ Its very basic but can be very handy, maybe the community will might want to dev
 For best results use same particle count in every file.
 If not possible make sure the first frame contain the max number of particles in your sequence (it will work but introduce flickering) .
 
-Tested only with Houdini .bhclassic format files. 
-----------------------------------------------------------------------
+Tested only with Houdini .bhclassic format files.
+
+Short Video Tutorial: 
+https://youtu.be/Qx6JuqjOfIA
+###############################################
 
 Instructions  :
 

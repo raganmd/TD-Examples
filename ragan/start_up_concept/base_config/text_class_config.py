@@ -1,14 +1,16 @@
 import socket
+import json
 
-system		= mod( 'text_system_config' ).uri
-machines 	= list( mod( 'text_system_config' ).uri.keys() )
+system		= op( "text_system_config" ).text
 machine_ip	= socket.gethostbyname( socket.gethostname() )
-
 project		= op.Project1
 
 class Config:
 	
 	def __init__( self ):
+
+		self.System			= json.loads( system )
+		self.Machines		= list( self.System )
 
 		return
 
@@ -25,7 +27,7 @@ class Config:
 			project.unstore( 'local_config' )
 
 			# check for key match:
-			system_machine = machine_ip in system
+			system_machine = machine_ip in self.System
 
 			# create a new empty dictionary
 			local_config = {}
@@ -34,11 +36,11 @@ class Config:
 			if system_machine:	
 				# print( 'I have a job for you' )
 				local_config[ 'uri' ]			= machine_ip
-				local_config[ 'local_id' ]		= system[ machine_ip ][ 'local_ID' ]
-				local_config[ 'role' ]			= system[ machine_ip ][ 'role' ]
-				local_config[ 'tox' ]			= system[ machine_ip ][ 'tox' ]
-				local_config[ 'media_path' ]	= system[ machine_ip ][ 'media_path' ]
-				local_config[ 'group' ]			= system[ machine_ip ][ 'group' ]
+				local_config[ 'local_id' ]		= self.System[ machine_ip ][ 'local_ID' ]
+				local_config[ 'role' ]			= self.System[ machine_ip ][ 'role' ]
+				local_config[ 'tox' ]			= self.System[ machine_ip ][ 'tox' ]
+				local_config[ 'media_path' ]	= self.System[ machine_ip ][ 'media_path' ]
+				local_config[ 'group' ]			= self.System[ machine_ip ][ 'group' ]
 				local_config[ 'outputs' ]		= sum([local_config['group'][projector] for projector in [groupname for groupname in local_config['group']]], [])
 				
 				project.store( 'local_config' , local_config )

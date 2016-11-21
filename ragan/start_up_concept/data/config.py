@@ -1,5 +1,5 @@
-uri = { 
-	"172.16.12.1211" : {
+{ 
+	"172.16.12.115" : {
 		"local_ID" : "asteroid" , 
 		"media_path" : "c:\\" , 
 		"role" : "calibrator" ,
